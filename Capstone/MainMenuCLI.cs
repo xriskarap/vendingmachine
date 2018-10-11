@@ -27,13 +27,14 @@ namespace Capstone
 
                 Console.Write("What option do you want to select? ");
                 string input = Console.ReadLine();
+                Console.WriteLine();
 
                 if (input == "1")
                 {
                    
                     foreach (Item item in vm.Items)
                     {
-                        Console.WriteLine($"{item.Name}");
+                        Console.WriteLine($"{item.SlotID}: {item.Name} has {item.Quantity} left");
                     }
                 }
                 else if (input == "2")

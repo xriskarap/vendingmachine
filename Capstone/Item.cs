@@ -30,5 +30,15 @@ namespace Capstone
         /// Type of item (Drink, Chips, Candy, or Gum)
         /// </summary>
         public string Type { get; set; }
+
+        public Item(string slotId, string name, decimal cost, string type)
+        {
+            this.SlotID = slotId;
+            this.Name = name;
+            this.Cost = cost;
+            this.Type = type;
+            this.Quantity = 5;
+        }
+
     }
 }
