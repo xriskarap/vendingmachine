@@ -7,16 +7,22 @@ namespace Capstone
 {
     public class VMStocker
     {
-        public List<string> GetStock()
+        public List<Item> GetStock()
         {
-            List<string> itemInventory = new List<string>();
+            List<Item> itemInventory = new List<Item>();
 
             using (StreamReader sr = new StreamReader("ItemInventory.txt"))
             {
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    itemInventory.Add(line);
+                    // break by delimeter
+
+
+                    // turn into item
+
+
+                    // add item to list 
                 }
             }
             return itemInventory;

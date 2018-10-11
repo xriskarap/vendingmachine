@@ -6,6 +6,13 @@ namespace Capstone
 {
     public class PurchaseMenuCLI
     {
+        private VendingMachine vm;
+
+        public PurchaseMenuCLI(VendingMachine vm)
+        {
+            this.vm = vm;
+        }
+
         public void Display()
         {
             while (true)
@@ -24,10 +31,8 @@ namespace Capstone
                 {
                     Console.WriteLine("How much money are you feeding the vending machine? ");
                     int moneyFed = int.Parse(Console.ReadLine());
-
-                    VendingMachine vm = new VendingMachine();
                     vm.FeedMoney(moneyFed);
-                    Console.WriteLine($"Your current balance is ${moneyFed}");
+                    Console.WriteLine($"Current Total Money Provided: ${vm.Balance}");
                 }
                 else if (input == "2")
                 {

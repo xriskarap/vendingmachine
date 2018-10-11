@@ -6,6 +6,13 @@ namespace Capstone
 {
     public class MainMenuCLI
     {
+        private VendingMachine vm;
+
+        public MainMenuCLI(VendingMachine vm)
+        {
+            this.vm = vm;
+        }
+
         public void Display()
         {
             while (true)
@@ -23,16 +30,15 @@ namespace Capstone
 
                 if (input == "1")
                 {
-                    VMStocker stock = new VMStocker();
-                    List<string> itemList = stock.GetStock();
-                    foreach (string item in itemList)
+                   
+                    foreach (Item item in vm.Items)
                     {
-                        Console.WriteLine($"{item}");
+                        Console.WriteLine($"{item.Name}");
                     }
                 }
                 else if (input == "2")
                 {
-                    PurchaseMenuCLI submenu = new PurchaseMenuCLI();
+                    PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
                     submenu.Display();
                 }
                 else if (input == "Q" || input == "q")

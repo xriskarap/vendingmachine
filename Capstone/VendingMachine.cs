@@ -6,14 +6,19 @@ namespace Capstone
 {
     public class VendingMachine
     {
+        public List<Item> Items { get; }
+
         /// <summary>
         /// Current balance of the vending machine
         /// </summary>
         public int Balance { get; set; }
 
-        public VendingMachine()
+
+        public VendingMachine(List<Item> items)
         {
+            this.Items = items;
             this.Balance = 0;
+
         }
 
 

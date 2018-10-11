@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Capstone
 {
@@ -6,7 +7,10 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            MainMenuCLI mainMenu = new MainMenuCLI();
+            VMStocker stocker = new VMStocker();
+            List<Item> items = stocker.GetStock();
+            VendingMachine vm = new VendingMachine(items);
+            MainMenuCLI mainMenu = new MainMenuCLI(vm);
             mainMenu.Display();
         }
     }
