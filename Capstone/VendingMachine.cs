@@ -33,46 +33,51 @@ namespace Capstone
             return Balance;
         }
 
-        public Item SelectProduct(string itemSelected)
+        public Item SelectProduct(string slot)
         {
+            Item selectedItem = null;
             foreach (Item item in Items)
             {
-                //if the selected item exists, AND there are at least 1 left in stock,
-                // AND the balance is LESS than item cost
-                if (item.SlotID == itemSelected && item.Quantity > 0 && Balance < item.Cost)
+                if (item.SlotID == slot)
                 {
-                    Console.WriteLine("Sorry, you have insufficient funds, please add more money to make that selection.");
-                }
-                //if the selected item exists, AND there are at least 1 in stock, 
-                //AND the balance is greater than the item cost
-                else if (item.SlotID == itemSelected && item.Quantity > 0 && Balance > item.Cost)
-                {
-                    //dispense to customers
-                    Console.WriteLine($"Thank you for your purchase. Here is your {itemSelected}!");
-                    // update balance
-                    this.Balance -= item.Cost;
-                    // update quantity
-                    item.Quantity -= 1;
-                    //return to purchase menu
-                    break;
-                }
-                //If the item selected exists in the machine, but has no quantity left
-                else if (item.SlotID == itemSelected && item.Quantity == 0)
-                {
-                    //tell customer the selected item is sold out
-                    Console.WriteLine($"Sorry, {itemSelected} is sold out. Please make another selection.");
-                    //return to purchase menu
-                    break;
-                }
-                else
-                {
-                    // Tell customer the selected item does not exist
-                    Console.WriteLine($"Sorry, {itemSelected} is not a valid item. Please make another selection.");
-                    // return to purchase menu
+                    selectedItem = item;
                     break;
                 }
             }
-            return null;
+            if (selectedItem == null)
+            {  
+                // Tell customer the selected item does not exist
+                Console.WriteLine($"Sorry, {slot} is not a valid slot choice. Please make another selection.");
+                // return to purchase menu
+            }
+            //if the selected item exists, AND there are at least 1 left in stock,
+            // AND the balance is LESS than item cost
+            else if (selectedItem.Quantity > 0 && Balance < selectedItem.Cost)
+            {
+
+                Console.WriteLine("Sorry, you have insufficient funds, please add more money to make that selection.");
+            }
+            //if the selected item exists, AND there are at least 1 in stock, 
+            //AND the balance is greater than the item cost
+            else if (selectedItem.Quantity > 0 && Balance > selectedItem.Cost)
+            {
+                //dispense to customers
+                Console.WriteLine($"Thank you for your purchase. Here is your {selectedItem.Name}!");
+                // update balance
+                this.Balance -= selectedItem.Cost;
+                // update quantity
+                selectedItem.Quantity -= 1;
+                //return to purchase menu
+            }
+            //If the item selected exists in the machine, but has no quantity left
+            else if (selectedItem.Quantity == 0)
+            {
+                //tell customer the selected item is sold out
+                Console.WriteLine($"Sorry, {selectedItem.Name} is sold out. Please make another selection.");
+                //return to purchase menu
+            }
+
+            return selectedItem;
         }
 
     }
