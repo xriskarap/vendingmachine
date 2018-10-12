@@ -7,7 +7,7 @@ namespace Capstone
     public class PurchaseMenuCLI
     {
         private VendingMachine vm;
-
+        static List<Item> purchasedItems = new List<Item>();
         public PurchaseMenuCLI(VendingMachine vm)
         {
             this.vm = vm;
@@ -15,45 +15,56 @@ namespace Capstone
 
         public void Display()
         {
+
             while (true)
             {
+                PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
                 Console.WriteLine();
                 Console.WriteLine("Purchase Menu");
                 Console.WriteLine("1] >> Feed Money");
                 Console.WriteLine("2] >> Select Product");
                 Console.WriteLine("3] >> Finish Transaction");
-                Console.WriteLine("4] >> Check your remaining balance");
                 Console.WriteLine("Q] >> Quit");
+                Console.WriteLine($"You have ${vm.Balance} left.");
+                Console.WriteLine();
 
                 Console.Write("What option do you want to select? ");
                 string input = Console.ReadLine();
                 Console.WriteLine();
 
+
+
                 if (input == "1")
                 {
-                    Console.WriteLine("How much money are you feeding the vending machine? ");
+                    Console.Write("How much money are you feeding the vending machine? ");
                     decimal moneyFed = decimal.Parse(Console.ReadLine());
                     Console.WriteLine();
                     vm.FeedMoney(moneyFed);
                     Console.WriteLine($"Current Total Money Provided: ${vm.Balance}");
+
+                    submenu.Display();
                 }
                 else if (input == "2")
                 {
-                    Console.WriteLine("Please select which product you would like to purchase by the slot identification: ");
-                    string itemSelected = Console.ReadLine().ToUpper();
+                    Console.Write("Please select which product you would like to purchase by the slot identification: ");
+                    string slot = Console.ReadLine().ToUpper();
                     Console.WriteLine();
-                    
-                    Console.WriteLine(vm.SelectProduct(itemSelected));
-                    PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
+
+                    Item item = vm.SelectProduct(slot);
+                    purchasedItems.Add(item);
+
                     submenu.Display();
                 }
                 else if (input == "3")
                 {
-                    Console.WriteLine("Performing submenu option 3");
-                }
-                else if (input == "4")
-                {
-                    Console.WriteLine($"You have ${vm.Balance} left.");
+                    Console.WriteLine();
+                    Console.WriteLine(vm.DispenseChange());
+
+                    foreach (Item item in purchasedItems)
+                    {
+                        Console.WriteLine(item.MakeSound());
+                    }
+
                 }
                 else if (input == "Q" || input == "q")
                 {

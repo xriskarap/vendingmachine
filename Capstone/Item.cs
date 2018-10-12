@@ -40,5 +40,28 @@ namespace Capstone
             this.Quantity = 5;
         }
 
+        public string MakeSound()
+        {
+                        
+            string sound = "";
+
+            if (this.Type == "Chip")
+            {
+                sound = "Crunch Crunch, Yum!";
+            }
+            else if (this.Type == "Candy")
+            {
+                sound = "Munch Munch, Yum!";
+            }
+            else if (this.Type == "Drink")
+            {
+                sound = "Glug Glug, Yum!";
+            }
+            else
+            {
+                sound = "Chew Chew, Yum!";
+            }
+            return sound;
+        }
     }
 }
