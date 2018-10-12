@@ -27,11 +27,13 @@ namespace Capstone
 
                 Console.Write("What option do you want to select? ");
                 string input = Console.ReadLine();
+                Console.WriteLine();
 
                 if (input == "1")
                 {
                     Console.WriteLine("How much money are you feeding the vending machine? ");
                     decimal moneyFed = decimal.Parse(Console.ReadLine());
+                    Console.WriteLine();
                     vm.FeedMoney(moneyFed);
                     Console.WriteLine($"Current Total Money Provided: ${vm.Balance}");
                 }
@@ -39,6 +41,7 @@ namespace Capstone
                 {
                     Console.WriteLine("Please select which product you would like to purchase by the slot identification: ");
                     string itemSelected = Console.ReadLine().ToUpper();
+                    Console.WriteLine();
                     vm.SelectProduct(itemSelected);
                     PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
                     submenu.Display();
