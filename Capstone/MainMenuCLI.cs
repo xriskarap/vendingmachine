@@ -40,6 +40,7 @@ namespace Capstone
                 else if (input == "2")
                 {
                     PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
+                    Console.WriteLine();
                     submenu.Display();
                 }
                 else if (input == "Q" || input == "q")

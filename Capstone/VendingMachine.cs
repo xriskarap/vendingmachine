@@ -37,7 +37,15 @@ namespace Capstone
         {
             foreach (Item item in Items)
             {
-                if (item.SlotID == itemSelected && item.Quantity > 0 && Balance > item.Cost)
+                //if the selected item exists, AND there are at least 1 left in stock,
+                // AND the balance is LESS than item cost
+                if (item.SlotID == itemSelected && item.Quantity > 0 && Balance < item.Cost)
+                {
+                    Console.WriteLine("Sorry, you have insufficient funds, please add more money to make that selection.");
+                }
+                //if the selected item exists, AND there are at least 1 in stock, 
+                //AND the balance is greater than the item cost
+                else if (item.SlotID == itemSelected && item.Quantity > 0 && Balance > item.Cost)
                 {
                     //dispense to customers
                     Console.WriteLine($"Thank you for your purchase. Here is your {itemSelected}!");
@@ -46,14 +54,15 @@ namespace Capstone
                     // update quantity
                     item.Quantity -= 1;
                 }
+                //If the item selected exists in the machine, but has no quantity left
                 else if (item.SlotID == itemSelected && item.Quantity == 0)
                 {
-                    //tell customer it is sold out
+                    //tell customer the selected item is sold out
                     Console.WriteLine($"Sorry, {itemSelected} is sold out. Please make another selection.");
                 }
                 else
                 {
-                    // Tell customer it does not exist
+                    // Tell customer the selected item does not exist
                     Console.WriteLine($"Sorry, {itemSelected} is not a valid item. Please make another selection.");
                 }
             }
