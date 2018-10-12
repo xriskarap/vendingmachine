@@ -40,7 +40,7 @@ namespace Capstone
             {
                 if (item.SlotID == slot)
                 {
-                    selectedItem = item;
+                    selectedItem = item; 
                     break;
                 }
             }
