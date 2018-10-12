@@ -1,23 +1,23 @@
-using Capstone;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Capstone;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CapstoneTests
-{
-    [TestClass]
-    public class VMStockerTest
-    {
-        [DataTestMethod]
+//namespace CapstoneTests
+//{
+//    [TestClass]
+//    public class VMStockerTest
+//    {
+//        [DataTestMethod]
 
-        public void ()
-        {
-            // Arrange
+//        public void ()
+//        {
+//            // Arrange
        
 
-            // Act
+//            // Act
           
 
-            //Assert
+//            //Assert
            
-        }
-    }
-}
+//        }
+//    }
+//}

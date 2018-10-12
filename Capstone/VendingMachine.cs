@@ -6,6 +6,7 @@ namespace Capstone
 {
     public class VendingMachine
     {
+        private VMLogger logger = new VMLogger();
         public List<Item> Items { get; }
 
         /// <summary>
@@ -30,6 +31,7 @@ namespace Capstone
             {
                 this.Balance += moneyFed;
             }
+            logger.LogFeed(moneyFed, this.Balance);
             return Balance;
         }
 
@@ -61,6 +63,7 @@ namespace Capstone
             //AND the balance is greater than the item cost
             else if (selectedItem.Quantity > 0 && Balance > selectedItem.Cost)
             {
+                logger.LogPurchase(selectedItem, this.Balance, Balance -= selectedItem.Cost);
                 //dispense to customers
                 Console.WriteLine($"Thank you for your purchase. Here is your {selectedItem.Name}!");
                 // update balance
@@ -104,8 +107,9 @@ namespace Capstone
                 change = change % 0.05M;
             }
             Console.WriteLine($"Here is your change: {quarters} quarters, {dimes} dimes & {nickels} nickels.");
-            Console.Write("Balance is: ");
+            Console.Write("Balance returned to: ");
             this.Balance = 0;
+            logger.LogChange(change, Balance);
             return change;
         }
     }
