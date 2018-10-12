@@ -42,7 +42,8 @@ namespace Capstone
                     Console.WriteLine("Please select which product you would like to purchase by the slot identification: ");
                     string itemSelected = Console.ReadLine().ToUpper();
                     Console.WriteLine();
-                    vm.SelectProduct(itemSelected);
+                    
+                    Console.WriteLine(vm.SelectProduct(itemSelected));
                     PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
                     submenu.Display();
                 }

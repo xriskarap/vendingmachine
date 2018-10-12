@@ -33,22 +33,23 @@ namespace Capstone
             return Balance;
         }
 
-        public Item SelectProduct(string itemSelected)
+        public string SelectProduct(string itemSelected)
         {
+            string result = null;
             foreach (Item item in Items)
             {
                 //if the selected item exists, AND there are at least 1 left in stock,
                 // AND the balance is LESS than item cost
-                if (item.SlotID == itemSelected && item.Quantity > 0 && Balance < item.Cost)
+                if (item.SlotID == itemSelected && item.Quantity > 0 && this.Balance < item.Cost)
                 {
-                    Console.WriteLine("Sorry, you have insufficient funds, please add more money to make that selection.");
+                    result = "Sorry, you have insufficient funds, please add more money to make that selection.";
                 }
                 //if the selected item exists, AND there are at least 1 in stock, 
                 //AND the balance is greater than the item cost
-                else if (item.SlotID == itemSelected && item.Quantity > 0 && Balance > item.Cost)
+                else if (item.SlotID == itemSelected && item.Quantity > 0 && this.Balance > item.Cost)
                 {
                     //dispense to customers
-                    Console.WriteLine($"Thank you for your purchase. Here is your {itemSelected}!");
+                    result = ($"Thank you for your purchase. Here is your {itemSelected}!");
                     // update balance
                     this.Balance -= item.Cost;
                     // update quantity
@@ -58,15 +59,15 @@ namespace Capstone
                 else if (item.SlotID == itemSelected && item.Quantity == 0)
                 {
                     //tell customer the selected item is sold out
-                    Console.WriteLine($"Sorry, {itemSelected} is sold out. Please make another selection.");
+                   result = $"Sorry, {itemSelected} is sold out. Please make another selection.";
                 }
                 else
                 {
                     // Tell customer the selected item does not exist
-                    Console.WriteLine($"Sorry, {itemSelected} is not a valid item. Please make another selection.");
+                    result = ($"Sorry, {itemSelected} is not a valid item. Please make another selection.");
                 }
             }
-            return null;
+            return result;
         }
 
     }
