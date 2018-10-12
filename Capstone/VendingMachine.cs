@@ -45,22 +45,16 @@ namespace Capstone
                     this.Balance -= item.Cost;
                     // update quantity
                     item.Quantity -= 1;
-                    //return to purchase menu
-                    break;
                 }
                 else if (item.SlotID == itemSelected && item.Quantity == 0)
                 {
                     //tell customer it is sold out
                     Console.WriteLine($"Sorry, {itemSelected} is sold out. Please make another selection.");
-                    //return to purchase menu
-                    break;
                 }
                 else
                 {
                     // Tell customer it does not exist
                     Console.WriteLine($"Sorry, {itemSelected} is not a valid item. Please make another selection.");
-                    // return to purchase menu
-                    break;
                 }
             }
             return null;
