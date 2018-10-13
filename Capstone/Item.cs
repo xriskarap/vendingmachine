@@ -42,7 +42,6 @@ namespace Capstone
 
         public string MakeSound()
         {
-                        
             string sound = "";
 
             if (this.Type == "Chip")

@@ -14,7 +14,10 @@ namespace Capstone
         /// </summary>
         public decimal Balance { get; set; }
 
-
+        /// <summary>
+        /// Creates a new vending machine
+        /// </summary>
+        /// <param name="items"></param>
         public VendingMachine(List<Item> items)
         {
             this.Items = items;
@@ -56,7 +59,6 @@ namespace Capstone
             // AND the balance is LESS than item cost
             else if (selectedItem.Quantity > 0 && Balance < selectedItem.Cost)
             {
-
                 Console.WriteLine("Sorry, you have insufficient funds, please add more money to make that selection.");
             }
             //if the selected item exists, AND there are at least 1 in stock, 
@@ -79,17 +81,18 @@ namespace Capstone
                 Console.WriteLine($"Sorry, {selectedItem.Name} is sold out. Please make another selection.");
                 //return to purchase menu
             }
-
             return selectedItem;
         }
 
         public decimal DispenseChange()
         {
             decimal change = this.Balance;
-
             decimal quarters = 0;
             decimal dimes = 0;
             decimal nickels = 0;
+            
+            // Logs to Log file the amount of change given to customer
+            logger.LogChange(change, 0.00m);
 
             while (change >= 0.25M)
             {
@@ -107,9 +110,8 @@ namespace Capstone
                 change = change % 0.05M;
             }
             Console.WriteLine($"Here is your change: {quarters} quarters, {dimes} dimes & {nickels} nickels.");
-            Console.Write("Balance returned to: ");
+            Console.Write("Balance returned to: $");
             this.Balance = 0;
-            logger.LogChange(change, Balance);
             return change;
         }
     }

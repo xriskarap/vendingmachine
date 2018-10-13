@@ -15,7 +15,6 @@ namespace Capstone
 
         public void Display()
         {
-
             while (true)
             {
                 PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
@@ -32,9 +31,8 @@ namespace Capstone
                 string input = Console.ReadLine();
                 Console.WriteLine();
 
-
-                    if (input == "1")
-                    {
+                if (input == "1")
+                {
                     try
                     {
                         Console.Write("How much money are you feeding the vending machine? ");
@@ -49,46 +47,41 @@ namespace Capstone
                         Console.WriteLine();
                         Console.WriteLine("That is not money. Please enter money.");
                     }
-                        
-                    }           
-            
+                }
                 else if (input == "2")
+                {
+                    Console.Write("Please select which product you would like to purchase by the slot identification: ");
+                    string slot = Console.ReadLine().ToUpper();
+                    Console.WriteLine();
+
+                    Item item = vm.SelectProduct(slot);
+                    purchasedItems.Add(item);
+
+                    submenu.Display();
+                }
+                else if (input == "3")
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(vm.DispenseChange());
+
+                    // checking the type of the user's item, and returning the sound.
+                    foreach (Item item in purchasedItems)
                     {
-                        Console.Write("Please select which product you would like to purchase by the slot identification: ");
-                        string slot = Console.ReadLine().ToUpper();
-                        Console.WriteLine();
-
-                        Item item = vm.SelectProduct(slot);
-                        purchasedItems.Add(item);
-
-                        submenu.Display();
+                        Console.WriteLine(item.MakeSound());
                     }
-                    else if (input == "3")
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine(vm.DispenseChange());
-
-                        // checking the type of the user's item, and returning the sound.
-                        foreach (Item item in purchasedItems)
-                        {
-                            Console.WriteLine(item.MakeSound());
-                        }
-
-                    }
-                    else if (input == "Q" || input == "q")
-                    {
-                        Console.WriteLine("Returning to main menu");
-                        MainMenuCLI mainMenu = new MainMenuCLI(vm);
-                        mainMenu.Display();
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please try again");
-                    }
-
-                    Console.ReadLine();
-                
+                }
+                else if (input == "Q" || input == "q")
+                {
+                    Console.WriteLine("Returning to main menu");
+                    MainMenuCLI mainMenu = new MainMenuCLI(vm);
+                    mainMenu.Display();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please try again");
+                }
+                Console.ReadLine();
             }
         }
     }
