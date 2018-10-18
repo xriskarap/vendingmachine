@@ -64,7 +64,21 @@ namespace CapstoneTests
 
             decimal result = vm.DispenseChange();
 
+            Assert.AreEqual(0, vm.Balance);
             Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void WhenMachineHasMoneyAndFinishes_RemainingMoneyIsDispensed()
+        {
+            VendingMachine vm = new VendingMachine(itemsList);
+
+            vm.FeedMoney(3.00M);
+
+            decimal money = vm.DispenseChange();
+
+            Assert.AreEqual(3.00M, money);
+            Assert.AreEqual(0, vm.Balance);
         }
     }
 }

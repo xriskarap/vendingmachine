@@ -6,6 +6,8 @@ namespace Capstone
 {
     public class VMLogger
     {
+        private const string LogFile = "Log.txt";
+
         /// <summary>
         /// Logs money fed to vending machine to Log.txt file
         /// </summary>
@@ -13,14 +15,7 @@ namespace Capstone
         /// <param name="finalAmount">Updated total amount fed to vending machine</param>
         public void LogFeed(decimal amountFed, decimal finalAmount)
         {
-            using (StreamWriter sw = new StreamWriter("Log.txt", true))
-            {
-                sw.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt"));
-                sw.Write(" FEED MONEY: ");
-                sw.Write($"{amountFed:C} ");
-                sw.Write($"{finalAmount:C}");
-                sw.WriteLine();
-            }
+            this.LogMessage($"FEED MONEY: {amountFed:C} {finalAmount:C}");
         }
 
         /// <summary>
@@ -31,16 +26,9 @@ namespace Capstone
         /// <param name="finalBalance">Updated balance after purchase</param>
         public void LogPurchase(Item item, decimal initialBalance, decimal finalBalance)
         {
-            using (StreamWriter sw = new StreamWriter("Log.txt", true))
-            {
-                sw.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt"));
-                sw.Write($" {item.Name} {item.SlotID}: ");
-                sw.Write($"{initialBalance:C} ");
-                sw.Write($"{finalBalance:C}");
-                sw.WriteLine();
-            }
+            this.LogMessage($"{item.Name} {item.SlotID}: {initialBalance:C} {finalBalance:C}");
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,13 +36,21 @@ namespace Capstone
         /// <param name="balance"></param>
         public void LogChange(decimal change, decimal balance)
         {
-            using (StreamWriter sw = new StreamWriter("Log.txt", true))
+            this.LogMessage($"GIVE CHANGE: {change:C} {balance:C}");
+        }
+
+        private void LogMessage(string message)
+        {
+            try
             {
-                sw.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt"));
-                sw.Write(" GIVE CHANGE: ");
-                sw.Write($"{change:C} ");
-                sw.Write($"{balance:C}");
-                sw.WriteLine();
+                using (StreamWriter sw = new StreamWriter(LogFile, true))
+                {
+                    sw.WriteLine($"{DateTime.Now.ToString("MM/dd/yyyy :HH:mm:ss tt")} {message}");
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("Error writing log file.");
             }
         }
     }

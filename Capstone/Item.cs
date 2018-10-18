@@ -7,9 +7,9 @@ namespace Capstone
     public class Item
     {
         /// <summary>
-        /// Cost of the item
+        /// Gets or sets gets the cost of the item
         /// </summary>
-        public decimal Cost {get; set;}
+        public decimal Cost { get; set; }
 
         /// <summary>
         /// Slot where item is stored
@@ -60,6 +60,7 @@ namespace Capstone
             {
                 sound = "Chew Chew, Yum!";
             }
+
             return sound;
         }
     }

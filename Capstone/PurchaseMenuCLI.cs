@@ -17,7 +17,6 @@ namespace Capstone
         {
             while (true)
             {
-                PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
                 Console.WriteLine();
                 Console.WriteLine("Purchase Menu");
                 Console.WriteLine("1] >> Feed Money");
@@ -40,7 +39,6 @@ namespace Capstone
                         Console.WriteLine();
                         vm.FeedMoney(moneyFed);
                         Console.WriteLine($"Current Total Money Provided: ${vm.Balance}");
-                        submenu.Display();
                     }
                     catch (FormatException e)
                     {
@@ -57,7 +55,6 @@ namespace Capstone
                     Item item = vm.SelectProduct(slot);
                     purchasedItems.Add(item);
 
-                    submenu.Display();
                 }
                 else if (input == "3")
                 {
@@ -73,15 +70,14 @@ namespace Capstone
                 else if (input == "Q" || input == "q")
                 {
                     Console.WriteLine("Returning to main menu");
-                    MainMenuCLI mainMenu = new MainMenuCLI(vm);
-                    mainMenu.Display();
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Please try again");
                 }
-                Console.ReadLine();
+                
+
             }
         }
     }
